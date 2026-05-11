@@ -42,7 +42,7 @@ fun DetailScreen(
     if (showDialog) {
         AlertDialog(
             onDismissRequest = { showDialog = false },
-            text = { Text("Hapus catatan ini?") },
+            text = { Text("Hapus pengeluaran ini?") },
             confirmButton = {
                 TextButton(onClick = {
                     existing?.let { viewModel.hapusData(it) }
