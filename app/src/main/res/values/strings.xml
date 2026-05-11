@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Asessment2</string>
+    <string name="app_name">MoneyPath</string>
+    <string name="label_item">Nama Pengeluaran</string>
+    <string name="label_nominal">Nominal (Rp)</string>
+    <string name="tombol_simpan">Simpan Catatan</string>
+    <string name="empty_state">Belum ada catatan pengeluaran.</string>
+    <string name="list">Tampilan list</string>
+    <string name="grid">Tampilan grid</string>
 </resources>
