@@ -23,6 +23,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             initialValue = emptyList()
         )
 
+    val deletedData: StateFlow<List<Pengeluaran>> = dao.getDeletedPengeluaran()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = emptyList()
+        )
+
     val isGridLayout: StateFlow<Boolean> = settings.layoutFlow
         .stateIn(
             scope = viewModelScope,
@@ -51,7 +58,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun hapusData(item: Pengeluaran) {
-        viewModelScope.launch(Dispatchers.IO) { dao.delete(item) }
+        viewModelScope.launch(Dispatchers.IO) { dao.softDelete(item.id) }
+    }
+
+    fun pulihkanData(item: Pengeluaran) {
+        viewModelScope.launch(Dispatchers.IO) { dao.restore(item.id) }
+    }
+
+    fun hapusPermanent(item: Pengeluaran) {
+        viewModelScope.launch(Dispatchers.IO) { dao.deletePermanent(item.id) }
     }
 
     fun updateData(id: Int, nama: String, nominal: String) {

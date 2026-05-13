@@ -15,6 +15,18 @@ interface PengeluaranDao {
     @Delete
     suspend fun delete(pengeluaran: Pengeluaran)
 
-    @Query("SELECT * FROM pengeluaran ORDER BY tanggal DESC")
+    @Query("SELECT * FROM pengeluaran WHERE isDeleted = 0 ORDER BY tanggal DESC")
     fun getSemuaPengeluaran(): Flow<List<Pengeluaran>>
+
+    @Query("SELECT * FROM pengeluaran WHERE isDeleted = 1 ORDER BY tanggal DESC")
+    fun getDeletedPengeluaran(): Flow<List<Pengeluaran>>
+
+    @Query("UPDATE pengeluaran SET isDeleted = 1 WHERE id = :id")
+    suspend fun softDelete(id: Int)
+
+    @Query("UPDATE pengeluaran SET isDeleted = 0 WHERE id = :id")
+    suspend fun restore(id: Int)
+
+    @Query("DELETE FROM pengeluaran WHERE id = :id")
+    suspend fun deletePermanent(id: Int)
 }

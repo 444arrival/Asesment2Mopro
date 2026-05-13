@@ -20,6 +20,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -77,7 +78,6 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel = view
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
-
                     IconButton(onClick = { viewModel.setGridLayout(!isGrid) }) {
                         Icon(
                             painter = painterResource(
@@ -88,6 +88,13 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel = view
                                 if (isGrid) R.string.list
                                 else R.string.grid
                             ),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    IconButton(onClick = { navController.navigate("recycle_bin") }) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Recycle Bin",
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }

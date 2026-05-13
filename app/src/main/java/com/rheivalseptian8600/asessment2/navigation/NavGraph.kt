@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.rheivalseptian8600.asessment2.ui.theme.screen.AboutScreen
 import com.rheivalseptian8600.asessment2.ui.theme.screen.DetailScreen
 import com.rheivalseptian8600.asessment2.ui.theme.screen.MainScreen
+import com.rheivalseptian8600.asessment2.ui.theme.screen.RecycleBinScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
@@ -27,6 +28,9 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
         }
         composable(route = "about") {
             AboutScreen(navController = navController)
+        }
+        composable(route = "recycle_bin") {
+            RecycleBinScreen(navController = navController)
         }
     }
 }

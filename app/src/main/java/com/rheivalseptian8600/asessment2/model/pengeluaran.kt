@@ -9,5 +9,6 @@ data class Pengeluaran(
     val id: Int = 0,
     val nama: String,
     val nominal: Int,
-    val tanggal: Long = System.currentTimeMillis()
+    val tanggal: Long = System.currentTimeMillis(),
+    val isDeleted: Boolean = false
 )
