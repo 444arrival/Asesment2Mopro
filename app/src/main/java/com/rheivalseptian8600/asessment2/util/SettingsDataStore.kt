@@ -13,14 +13,25 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 
 class SettingsDataStore(private val context: Context) {
     private val IS_GRID_LAYOUT = booleanPreferencesKey("is_grid_layout")
+    private val IS_DARK_MODE = booleanPreferencesKey("is_dark_mode")
 
     val layoutFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
         preferences[IS_GRID_LAYOUT] ?: false
     }
 
+    val darkModeFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[IS_DARK_MODE] ?: false
+    }
+
     suspend fun saveLayoutSetting(isGridLayout: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[IS_GRID_LAYOUT] = isGridLayout
+        }
+    }
+
+    suspend fun saveDarkModeSetting(isDarkMode: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[IS_DARK_MODE] = isDarkMode
         }
     }
 }

@@ -30,8 +30,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             initialValue = false
         )
 
+    val isDarkMode: StateFlow<Boolean> = settings.darkModeFlow
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = false
+        )
+
     fun setGridLayout(isGrid: Boolean) {
         viewModelScope.launch { settings.saveLayoutSetting(isGrid) }
+    }
+
+    fun setDarkMode(isDark: Boolean) {
+        viewModelScope.launch { settings.saveDarkModeSetting(isDark) }
     }
 
     fun simpanData(nama: String, nominal: String) {

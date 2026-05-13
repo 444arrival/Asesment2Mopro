@@ -60,12 +60,24 @@ fun formatRupiah(nominal: Int): String {
 fun MainScreen(navController: NavHostController, viewModel: MainViewModel = viewModel()) {
     val data by viewModel.data.collectAsState()
     val isGrid by viewModel.isGridLayout.collectAsState()
+    val isDark by viewModel.isDarkMode.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("MoneyPath") },
                 actions = {
+                    IconButton(onClick = { viewModel.setDarkMode(!isDark) }) {
+                        Icon(
+                            painter = painterResource(
+                                if (isDark) R.drawable.outline_light_mode_24
+                                else R.drawable.baseline_dark_mode_24
+                            ),
+                            contentDescription = if (isDark) "Light Mode" else "Dark Mode",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+
                     IconButton(onClick = { viewModel.setGridLayout(!isGrid) }) {
                         Icon(
                             painter = painterResource(
